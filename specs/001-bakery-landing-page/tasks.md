@@ -50,10 +50,10 @@ Single Rails application at the repository root (per [plan.md](./plan.md) Projec
 **Independent Test**: Load `GET /` and verify the name, tagline, products, address, hours, and
 social-media-coming-soon section render in Spanish with no broken/cluttered layout.
 
-- [ ] T010 [P] [US1] Write request spec in `spec/requests/bakery_page_spec.rb` asserting `GET /` returns 200 and the response body includes the bakery name, tagline, at least one product name/description, address, business hours, and a social-media "coming soon" phrase, all in Spanish
-- [ ] T011 [US1] Create `app/views/bakery/home.html.erb` with sections for name/tagline, product highlights, address/hours, and social-media-coming-soon, using `BakeryProfile` (T008)
-- [ ] T012 [US1] Create `app/assets/stylesheets/bakery.css` with the warm bakery palette (cream/beige background, brown text/accents, terracotta/mustard accent), clean typography, and a responsive layout (no horizontal scroll on mobile widths)
-- [ ] T013 [P] [US1] Add product images under `app/assets/images/` (or placeholders) and reference them in `app/views/bakery/home.html.erb`, ensuring the layout degrades gracefully when `image_path` is absent
+- [X] T010 [P] [US1] Write request spec in `spec/requests/bakery_page_spec.rb` asserting `GET /` returns 200 and the response body includes the bakery name, tagline, at least one product name/description, address, business hours, and a social-media "coming soon" phrase, all in Spanish
+- [X] T011 [US1] Create `app/views/bakery/home.html.erb` with sections for name/tagline, product highlights, address/hours, and social-media-coming-soon, using `BakeryProfile` (T008)
+- [X] T012 [US1] Create `app/assets/stylesheets/bakery.css` with the warm bakery palette (cream/beige background, brown text/accents, terracotta/mustard accent), clean typography, and a responsive layout (no horizontal scroll on mobile widths)
+- [X] T013 [P] [US1] Add product images under `app/assets/images/` (or placeholders) and reference them in `app/views/bakery/home.html.erb`, ensuring the layout degrades gracefully when `image_path` is absent
 
 **Checkpoint**: User Story 1 is independently testable and deliverable.
 
@@ -67,10 +67,10 @@ page, opening a chat pre-filled with a greeting, on both mobile and desktop.
 **Independent Test**: Click/tap the WhatsApp link on `GET /` and verify its `href` matches the
 `wa.me` contract with the correct number and pre-filled greeting.
 
-- [ ] T014 [P] [US2] Write request spec in `spec/requests/bakery_page_spec.rb` asserting the WhatsApp link's `href` matches `https://wa.me/<digits>?text=...` with the configured number and the greeting "Hola, quisiera más información sobre sus productos." per [contracts/page.md](./contracts/page.md)
-- [ ] T015 [P] [US2] Write helper spec in `spec/helpers/bakery_helper_spec.rb` for `BakeryHelper#whatsapp_link`, covering correct URL encoding and digits-only number formatting
-- [ ] T016 [US2] Add a visibly prominent WhatsApp button/link (label "Contactar por WhatsApp") in `app/views/bakery/home.html.erb` using `whatsapp_link` (T009)
-- [ ] T017 [US2] Update `app/assets/stylesheets/bakery.css` so the WhatsApp button remains visible while scrolling (e.g., sticky header or floating button)
+- [X] T014 [P] [US2] Write request spec in `spec/requests/bakery_page_spec.rb` asserting the WhatsApp link's `href` matches `https://wa.me/<digits>?text=...` with the configured number and the greeting "Hola, quisiera más información sobre sus productos." per [contracts/page.md](./contracts/page.md)
+- [X] T015 [P] [US2] Write helper spec in `spec/helpers/bakery_helper_spec.rb` for `BakeryHelper#whatsapp_link`, covering correct URL encoding and digits-only number formatting
+- [X] T016 [US2] Add a visibly prominent WhatsApp button/link (label "Contactar por WhatsApp") in `app/views/bakery/home.html.erb` using `whatsapp_link` (T009)
+- [X] T017 [US2] Update `app/assets/stylesheets/bakery.css` so the WhatsApp button remains visible while scrolling (e.g., sticky header or floating button)
 
 **Checkpoint**: User Story 2 is independently testable and deliverable; both P1 stories together form the MVP.
 
@@ -78,9 +78,9 @@ page, opening a chat pre-filled with a greeting, on both mobile and desktop.
 
 ## Phase 5: Polish & Cross-Cutting Concerns
 
-- [ ] T018 [P] Write request spec in `spec/requests/bakery_page_spec.rb` (or a config/initializer spec) asserting the app fails fast with a clear error when `WHATSAPP_CONTACT_NUMBER` is unset, per the Edge Cases and [data-model.md](./data-model.md) validation rules
-- [ ] T019 [P] Manually run through [quickstart.md](./quickstart.md) validation steps on a mobile viewport (≈375px) and a desktop viewport (≈1440px), fixing any layout issues found
-- [ ] T020 Update `README.md` with setup instructions, including the `WHATSAPP_CONTACT_NUMBER` environment variable requirement
+- [X] T018 [P] Write request spec in `spec/requests/bakery_page_spec.rb` (or a config/initializer spec) asserting the app fails fast with a clear error when `WHATSAPP_CONTACT_NUMBER` is unset, per the Edge Cases and [data-model.md](./data-model.md) validation rules
+- [X] T019 [P] Manually run through [quickstart.md](./quickstart.md) validation steps on a mobile viewport (≈375px) and a desktop viewport (≈1440px), fixing any layout issues found
+- [X] T020 Update `README.md` with setup instructions, including the `WHATSAPP_CONTACT_NUMBER` environment variable requirement
 
 ---
 

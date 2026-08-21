@@ -1,0 +1,34 @@
+<main class="bakery-page">
+  <header class="bakery-hero">
+    <h1><%= @bakery.name %></h1>
+    <p class="tagline"><%= @bakery.tagline %></p>
+    <%= link_to "Contactar por WhatsApp", whatsapp_link(@bakery), class: "whatsapp-button", target: "_blank", rel: "noopener" %>
+  </header>
+
+  <section class="bakery-products">
+    <h2>Nuestros Productos</h2>
+    <div class="product-grid">
+      <% @bakery.products.each do |product| %>
+        <article class="product-card">
+          <% if product.image_path.present? %>
+            <%= image_tag product.image_path, alt: product.name, class: "product-image", onerror: "this.remove()" %>
+          <% end %>
+          <h3><%= product.name %></h3>
+          <p><%= product.description %></p>
+        </article>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="bakery-info">
+    <h2>Visítanos</h2>
+    <p><strong>Dirección:</strong> <%= @bakery.address %></p>
+    <p><strong>Horario:</strong> <%= @bakery.business_hours %></p>
+  </section>
+
+  <section class="bakery-social">
+    <p>Redes sociales próximamente</p>
+  </section>
+
+  <%= link_to "Contactar por WhatsApp", whatsapp_link(@bakery), class: "whatsapp-floating-button", target: "_blank", rel: "noopener" %>
+</main>

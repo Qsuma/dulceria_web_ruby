@@ -1,0 +1,97 @@
+:root {
+  --bakery-cream: #faf3e7;
+  --bakery-beige: #f0e2c9;
+  --bakery-brown: #4a2f22;
+  --bakery-accent: #c1682c; /* terracotta */
+}
+
+body {
+  margin: 0;
+  background-color: var(--bakery-cream);
+  color: var(--bakery-brown);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.5;
+}
+
+.bakery-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.bakery-hero {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: var(--bakery-beige);
+  border-radius: 0.5rem;
+}
+
+.bakery-hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+}
+
+.tagline {
+  margin: 0 0 1.5rem;
+  font-style: italic;
+}
+
+.whatsapp-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bakery-accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 2rem;
+  font-weight: bold;
+}
+
+.bakery-products,
+.bakery-info,
+.bakery-social {
+  margin-top: 2rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid var(--bakery-beige);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+
+.bakery-social {
+  text-align: center;
+  color: #7a6a5c;
+}
+
+.whatsapp-floating-button {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--bakery-accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+  .bakery-hero h1 {
+    font-size: 1.5rem;
+  }
+}
