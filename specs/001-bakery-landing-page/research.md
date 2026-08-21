@@ -1,14 +1,15 @@
 # Research: Bakery Landing Page
 
 ## Decision: Rails version & app shape
-- **Decision**: Ruby on Rails 7.1 (latest stable in the 7.x series), generated with `rails new`
-  in API-less, full-stack mode (`--css=tailwind` not required — plain CSS is enough per
-  Simplicity/YAGNI). No database adapter is configured as a hard dependency since this feature
-  needs none (see Storage decision below); the default SQLite adapter that ships with `rails new`
-  is left in place for future features rather than removed, but is not used by this feature.
-- **Rationale**: The project constitution mandates Ruby on Rails as the technology stack. Rails
-  7.1 is the current stable release with long-term community support and works with plain
-  ERB views without requiring a frontend JS framework, keeping scope minimal.
+- **Decision**: Ruby on Rails 8.1.3.1 with Ruby 4.0.5 (the toolchain already installed via rbenv
+  in the development environment), generated with `rails new . --minimal --skip-test`. No
+  database adapter is configured as a hard dependency since this feature needs none (see Storage
+  decision below); the default SQLite adapter that ships with `rails new` is left in place for
+  future features rather than removed, but is not used by this feature.
+- **Rationale**: The project constitution mandates Ruby on Rails as the technology stack. Using
+  the Rails/Ruby versions already installed avoids introducing a second toolchain version for a
+  single landing page, and Rails 8.1 works with plain ERB views without requiring a frontend JS
+  framework, keeping scope minimal.
 - **Alternatives considered**: Sinatra (rejected — constitution specifies Rails); a static
   HTML/CSS site with no backend framework (rejected — conflicts with the constitution's
   Technology Constraints, which mandate Rails for the project regardless of a given feature's
