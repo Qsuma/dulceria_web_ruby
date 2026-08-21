@@ -23,20 +23,20 @@ Single Rails application at the repository root (per [plan.md](./plan.md) Projec
 
 ## Phase 1: Setup (Project Initialization)
 
-- [ ] T001 Generate a new minimal Rails 7.1 app at the repository root (`rails new . --minimal --skip-test`), preserving the existing `.env`, `.gitignore`, `.github/`, and `.specify/` files
-- [ ] T002 Add `rspec-rails` and `dotenv-rails` to the `Gemfile`, run `bundle install`
-- [ ] T003 [P] Run `bin/rails generate rspec:install` to scaffold `spec/spec_helper.rb` and `spec/rails_helper.rb`
-- [ ] T004 [P] Require `dotenv/rails-now` (or equivalent) so `config/application.rb` loads `.env` in development
+- [X] T001 Generate a new minimal Rails 7.1 app at the repository root (`rails new . --minimal --skip-test`), preserving the existing `.env`, `.gitignore`, `.github/`, and `.specify/` files
+- [X] T002 Add `rspec-rails` and `dotenv-rails` to the `Gemfile`, run `bundle install`
+- [X] T003 [P] Run `bin/rails generate rspec:install` to scaffold `spec/spec_helper.rb` and `spec/rails_helper.rb`
+- [X] T004 [P] Require `dotenv/rails-now` (or equivalent) so `config/application.rb` loads `.env` in development
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
 **Purpose**: Core infrastructure required before any user story can be implemented or tested.
 
-- [ ] T005 Add `root "bakery#home"` to `config/routes.rb`
-- [ ] T006 Create `app/controllers/bakery_controller.rb` with a `#home` action rendering `bakery/home`
-- [ ] T007 Create `config/bakery.yml` with `name: "Dulces Lore"`, `tagline`, `address`, `business_hours`, and a `products` list (name/description/image_path) per [data-model.md](./data-model.md)
-- [ ] T008 Create `app/models/bakery_profile.rb` (plain Ruby object, not ActiveRecord) that loads `config/bakery.yml` and exposes `name`, `tagline`, `address`, `business_hours`, `products`, raising a clear configuration error if `ENV["WHATSAPP_CONTACT_NUMBER"]` is missing
-- [ ] T009 Create `app/helpers/bakery_helper.rb` with a `whatsapp_link` method building a `https://wa.me/<digits>?text=<url-encoded greeting>` URL from `ENV["WHATSAPP_CONTACT_NUMBER"]` and the fixed greeting "Hola, quisiera más información sobre sus productos."
+- [X] T005 Add `root "bakery#home"` to `config/routes.rb`
+- [X] T006 Create `app/controllers/bakery_controller.rb` with a `#home` action rendering `bakery/home`
+- [X] T007 Create `config/bakery.yml` with `name: "Dulces Lore"`, `tagline`, `address`, `business_hours`, and a `products` list (name/description/image_path) per [data-model.md](./data-model.md)
+- [X] T008 Create `app/models/bakery_profile.rb` (plain Ruby object, not ActiveRecord) that loads `config/bakery.yml` and exposes `name`, `tagline`, `address`, `business_hours`, `products`, raising a clear configuration error if `ENV["WHATSAPP_CONTACT_NUMBER"]` is missing
+- [X] T009 Create `app/helpers/bakery_helper.rb` with a `whatsapp_link` method building a `https://wa.me/<digits>?text=<url-encoded greeting>` URL from `ENV["WHATSAPP_CONTACT_NUMBER"]` and the fixed greeting "Hola, quisiera más información sobre sus productos."
 
 **Checkpoint**: Foundation ready — user story implementation can now begin.
 
