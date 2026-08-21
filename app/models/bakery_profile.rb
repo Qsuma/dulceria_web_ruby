@@ -1,7 +1,7 @@
 # Plain Ruby object (not ActiveRecord) representing the bakery's content, loaded
 # from config/bakery.yml. No database is used for this static, single-bakery page.
 class BakeryProfile
-  Product = Struct.new(:name, :description, :image_path, keyword_init: true)
+  Product = Struct.new(:name, :description, :category, :image_path, keyword_init: true)
 
   class MissingWhatsappNumberError < StandardError
     def initialize
@@ -30,5 +30,19 @@ class BakeryProfile
 
   def whatsapp_greeting
     WHATSAPP_GREETING
+  end
+
+  # Unique category names, in the order they first appear in config/bakery.yml.
+  def categories
+    products.map(&:category).uniq
+  end
+
+  # Products grouped by category, preserving category order.
+  def products_by_category
+    products.group_by(&:category)
+  end
+
+  def category_anchor(category)
+    category.to_s.parameterize
   end
 end

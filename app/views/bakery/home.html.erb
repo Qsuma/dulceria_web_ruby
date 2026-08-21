@@ -1,24 +1,44 @@
+<header class="app-bar">
+  <button type="button" class="drawer-toggle" aria-label="Abrir menú" aria-controls="drawer" aria-expanded="false" data-drawer-toggle>
+    <span></span><span></span><span></span>
+  </button>
+  <span class="app-bar-icon" aria-hidden="true">🥖</span>
+  <span class="app-bar-name"><%= @bakery.name %></span>
+</header>
+
+<div class="drawer-backdrop" data-drawer-backdrop></div>
+
+<nav id="drawer" class="drawer" aria-label="Categorías de productos">
+  <h2>Categorías</h2>
+  <ul>
+    <% @bakery.categories.each do |category| %>
+      <li><a href="#<%= @bakery.category_anchor(category) %>" data-drawer-link><%= category %></a></li>
+    <% end %>
+  </ul>
+</nav>
+
 <main class="bakery-page">
-  <header class="bakery-hero">
+  <section class="bakery-hero">
     <h1><%= @bakery.name %></h1>
     <p class="tagline"><%= @bakery.tagline %></p>
-    <%= link_to "Contactar por WhatsApp", whatsapp_link(@bakery), class: "whatsapp-button", target: "_blank", rel: "noopener" %>
-  </header>
-
-  <section class="bakery-products">
-    <h2>Nuestros Productos</h2>
-    <div class="product-grid">
-      <% @bakery.products.each do |product| %>
-        <article class="product-card">
-          <% if product.image_path.present? %>
-            <%= image_tag product.image_path, alt: product.name, class: "product-image", onerror: "this.remove()" %>
-          <% end %>
-          <h3><%= product.name %></h3>
-          <p><%= product.description %></p>
-        </article>
-      <% end %>
-    </div>
   </section>
+
+  <% @bakery.products_by_category.each do |category, products| %>
+    <section id="<%= @bakery.category_anchor(category) %>" class="product-category">
+      <h2><%= category %></h2>
+      <div class="product-grid">
+        <% products.each do |product| %>
+          <article class="product-card">
+            <% if product.image_path.present? %>
+              <%= image_tag product.image_path, alt: product.name, class: "product-image", onerror: "this.remove()" %>
+            <% end %>
+            <h3><%= product.name %></h3>
+            <p><%= product.description %></p>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
 
   <section class="bakery-info">
     <h2>Visítanos</h2>
@@ -26,9 +46,16 @@
     <p><strong>Horario:</strong> <%= @bakery.business_hours %></p>
   </section>
 
-  <section class="bakery-social">
-    <p>Redes sociales próximamente</p>
+  <section class="bakery-about" id="sobre-nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p><%= @bakery.tagline %></p>
+    <div class="bakery-social">
+      <p>Redes sociales próximamente</p>
+    </div>
   </section>
-
-  <%= link_to "Contactar por WhatsApp", whatsapp_link(@bakery), class: "whatsapp-floating-button", target: "_blank", rel: "noopener" %>
 </main>
+
+<%= link_to "Contactar por WhatsApp", whatsapp_link(@bakery), class: "whatsapp-floating-button", target: "_blank", rel: "noopener", data: { whatsapp_fab: true } %>
+
+<%= javascript_include_tag "bakery", defer: true %>
+
