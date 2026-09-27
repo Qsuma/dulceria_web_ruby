@@ -49,6 +49,40 @@ RSpec.describe "Bakery page", type: :request do
       expect(response.body).to include("Hacer orden")
       expect(response.body).to include("whatsapp-icon")
     end
+
+    it "displays the how-we-work process section" do
+      get root_path
+
+      expect(response.body).to include('id="como-trabajamos"')
+      expect(response.body).to include("Todo empieza con una")
+      expect(response.body).to include("idea dulce.")
+      expect(response.body).to include("En Dulces Lore hacemos que encargar tus dulces sea sencillo.")
+      expect(response.body).to include("Elige")
+      expect(response.body).to include("Personaliza")
+      expect(response.body).to include("Confirmamos")
+      expect(response.body).to include("Preparamos")
+      expect(response.body).to include("Tú imaginas el momento. Nosotros ponemos el dulce.")
+    end
+
+    it "displays the quality and care section" do
+      get root_path
+
+      expect(response.body).to include('id="calidad-y-cuidado"')
+      expect(response.body).to include("Hecho con cuidado.")
+      expect(response.body).to include("Pensado para compartir.")
+      expect(response.body).to include("Ingredientes y elaboración")
+      expect(response.body).to include("Presentación")
+      expect(response.body).to include("Pedidos personalizados")
+      expect(response.body).to include("Atención cercana")
+      expect(response.body).to include("Pequeños detalles hacen grandes momentos.")
+    end
+
+    it "adds the institutional sections to the drawer" do
+      get root_path
+
+      expect(response.body).to include('href="#como-trabajamos"')
+      expect(response.body).to include('href="#calidad-y-cuidado"')
+    end
   end
 
   describe "when WHATSAPP_CONTACT_NUMBER is missing" do
