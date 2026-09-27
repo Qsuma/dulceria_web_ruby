@@ -11,11 +11,11 @@
 <div class="drawer-backdrop" data-drawer-backdrop></div>
 
 <nav id="drawer" class="drawer" aria-label="Categorías de productos">
-  <h2>Categorías</h2>
+  <h2>Explora</h2>
   <ul>
-    <% @bakery.categories.each do |category| %>
-      <li><a href="#<%= @bakery.category_anchor(category) %>" data-drawer-link><%= category %></a></li>
-    <% end %>
+    <li><a href="#packs" data-drawer-link>Packs para compartir</a></li>
+    <li><a href="#crea-tu-oferta" data-drawer-link>Crea tu oferta</a></li>
+    <li><a href="#visitanos" data-drawer-link>Visítanos</a></li>
   </ul>
 </nav>
 
@@ -25,7 +25,7 @@
       <p class="eyebrow">PANADERÍA ARTESANAL <span aria-hidden="true">✦</span> DESDE SANTA CLARA</p>
       <h1>Un poquito de <em>dulce</em> para cada día.</h1>
       <p class="tagline"><%= @bakery.tagline %></p>
-      <a class="hero-cta" href="#panes">Descubre el menú <span aria-hidden="true">↓</span></a>
+      <a class="hero-cta" href="#packs">Descubre los packs <span aria-hidden="true">↓</span></a>
     </div>
     <div class="hero-mark">
       <div class="hero-sparkle hero-sparkle-one" aria-hidden="true">✦</div>
@@ -34,38 +34,85 @@
     </div>
   </section>
 
-  <nav class="category-pills" aria-label="Explorar categorías">
-    <span class="category-label">Hoy se antoja:</span>
-    <% @bakery.categories.each do |category| %>
-      <a href="#<%= @bakery.category_anchor(category) %>"><%= category %> <span aria-hidden="true">↘</span></a>
-    <% end %>
+  <nav class="category-pills" aria-label="Explorar packs">
+    <span class="category-label">Elige tu ocasión:</span>
+    <a href="#packs">Packs para compartir <span aria-hidden="true">↘</span></a>
+    <a href="#crea-tu-oferta">Personaliza tu oferta <span aria-hidden="true">↘</span></a>
   </nav>
 
-  <% @bakery.products_by_category.each do |category, products| %>
-    <section id="<%= @bakery.category_anchor(category) %>" class="product-category">
+  <section id="packs" class="product-category packs-section">
       <div class="section-heading">
-        <p class="section-kicker">NUESTROS FAVORITOS</p>
-        <h2><%= category %><span aria-hidden="true">.</span></h2>
+        <p class="section-kicker">PARA CADA MOMENTO</p>
+        <h2>Elige tu pack<span aria-hidden="true">.</span></h2>
         <span class="section-rule" aria-hidden="true"></span>
       </div>
-      <div class="product-grid">
-        <% products.each do |product| %>
-          <article class="product-card">
-            <% if product.image_path.present? %>
-              <%= image_tag product.image_path, alt: product.name, class: "product-image", onerror: "this.remove()" %>
-            <% else %>
-              <div class="product-art" aria-hidden="true"><span>✦</span><strong><%= product.name.first %></strong></div>
-            <% end %>
-            <div class="product-details">
-              <h3><%= product.name %></h3>
-              <p><%= product.description %></p>
-              <span class="product-arrow" aria-hidden="true">↗</span>
+      <div class="packs-carousel" data-packs-carousel>
+        <div class="packs-track">
+          <% @bakery.packs.each_with_index do |pack, index| %>
+            <article class="pack-card<%= " is-active" if index.zero? %>" data-pack-slide>
+              <div class="pack-visual pack-visual-<%= index + 1 %>" aria-hidden="true">
+                <span class="pack-visual-star">✦</span>
+                <span class="pack-visual-number">0<%= index + 1 %></span>
+                <span class="pack-visual-word">Dulce<br>momento</span>
+              </div>
+              <div class="pack-details">
+                <p class="pack-number">0<%= index + 1 %> / 03</p>
+                <h3><%= pack.name %></h3>
+                <p class="pack-subtitle"><%= pack.subtitle %></p>
+                <ul>
+                  <% pack.items.each do |item| %>
+                    <li><span aria-hidden="true">✦</span><%= item %></li>
+                  <% end %>
+                </ul>
+                <div class="pack-footer"><strong>Precio: Dinámico</strong><span aria-hidden="true">↗</span></div>
+              </div>
+            </article>
+          <% end %>
+          <article class="pack-card custom-offer-slide" data-pack-slide>
+            <div class="custom-slide-symbol" aria-hidden="true">+</div>
+            <div class="pack-details">
+              <p class="pack-number">04 / 04</p>
+              <h3>Tu oferta,<br><em>a tu medida.</em></h3>
+              <p class="pack-subtitle">Elige tus productos y las cantidades para crear algo solo tuyo.</p>
+              <a class="custom-slide-button" href="#crea-tu-oferta" data-open-custom-offer>Crear mi oferta <span aria-hidden="true">↗</span></a>
             </div>
           </article>
+        </div>
+        <div class="carousel-controls">
+          <div class="carousel-dots" aria-label="Seleccionar pack">
+            <% @bakery.packs.each_with_index do |pack, index| %>
+              <button type="button" class="carousel-dot<%= " is-active" if index.zero? %>" aria-label="Ver <%= pack.name %>" aria-current="<%= "true" if index.zero? %>" data-carousel-dot="<%= index %>"></button>
+            <% end %>
+            <button type="button" class="carousel-dot" aria-label="Ver Crear tu oferta" aria-current="false" data-carousel-dot="<%= @bakery.packs.length %>"></button>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section id="crea-tu-oferta" class="custom-offer-section is-hidden">
+    <div class="custom-offer-intro">
+      <p class="section-kicker">TU MOMENTO, A TU MANERA</p>
+      <h2>Crea tu <em>propia oferta.</em></h2>
+      <p>Combina tus favoritos y cuéntanos qué quieres celebrar. Nosotros hacemos el resto.</p>
+    </div>
+    <form class="custom-offer-form" data-custom-offer-form data-whatsapp-number="<%= @bakery.whatsapp_number.gsub(/\D/, "") %>">
+      <div class="custom-offer-header">
+        <strong>Elige tus productos</strong>
+        <span><b data-selection-count>0</b> seleccionados</span>
+      </div>
+      <div class="available-products">
+        <% @bakery.available_products.each do |product| %>
+          <label class="product-option">
+            <span class="product-icon product-icon-<%= product["icon"] %>" aria-hidden="true"></span>
+            <span class="product-option-name"><%= product["name"] %></span>
+            <input class="quantity-input" type="number" name="quantities[<%= product["name"] %>]" value="0" min="0" max="99" data-product-quantity aria-label="Cantidad de <%= product["name"] %>">
+          </label>
         <% end %>
       </div>
-    </section>
-  <% end %>
+      <button type="submit" class="custom-offer-submit">Solicitar mi oferta <span aria-hidden="true">↗</span></button>
+      <p class="custom-offer-feedback" data-custom-offer-feedback role="status" aria-live="polite"></p>
+    </form>
+  </section>
 
   <section class="bakery-info" id="visitanos">
     <div>

@@ -18,9 +18,13 @@ RSpec.describe "Bakery page", type: :request do
       expect(response.body).to include("Panadería artesanal con el sabor de siempre")
     end
 
-    it "displays at least one product highlight" do
+    it "displays the available celebration packs" do
       get root_path
-      expect(response.body).to include("Pan de Yuca")
+      expect(response.body).to include("Pack Merienda")
+      expect(response.body).to include("Pack Cumpleaños")
+      expect(response.body).to include("Pack Fiesta")
+      expect(response.body).to include("pack-visual-1")
+      expect(response.body).to include("Crea tu <em>propia oferta.")
     end
 
     it "displays the address and business hours" do

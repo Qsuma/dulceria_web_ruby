@@ -2,6 +2,7 @@
 # from config/bakery.yml. No database is used for this static, single-bakery page.
 class BakeryProfile
   Product = Struct.new(:name, :description, :category, :image_path, keyword_init: true)
+  Pack = Struct.new(:name, :subtitle, :image_path, :items, keyword_init: true)
 
   class MissingWhatsappNumberError < StandardError
     def initialize
@@ -9,7 +10,7 @@ class BakeryProfile
     end
   end
 
-  attr_reader :name, :tagline, :address, :business_hours, :products, :whatsapp_number
+  attr_reader :name, :tagline, :address, :business_hours, :products, :packs, :available_products, :whatsapp_number
 
   WHATSAPP_GREETING = "Hola, quisiera más información sobre sus productos.".freeze
 
@@ -24,6 +25,10 @@ class BakeryProfile
     @address = config.fetch("address")
     @business_hours = config.fetch("business_hours")
     @products = config.fetch("products", []).map { |p| Product.new(**p.transform_keys(&:to_sym)) }
+    @packs = config.fetch("packs", []).map { |pack| Pack.new(**pack.transform_keys(&:to_sym)) }
+    @available_products = config.fetch("available_products", []).map do |product|
+      product.is_a?(Hash) ? product : { "name" => product, "icon" => "sparkle" }
+    end
     @whatsapp_number = ENV["WHATSAPP_CONTACT_NUMBER"]
     raise MissingWhatsappNumberError if @whatsapp_number.blank?
   end
