@@ -7,8 +7,39 @@
     var backdrop = document.querySelector("[data-drawer-backdrop]");
     var links = document.querySelectorAll("[data-drawer-link]");
     var fab = document.querySelector("[data-whatsapp-fab]");
+    var orderCart = document.querySelector("[data-order-cart]");
+    var orderItems = document.querySelector("[data-order-items]");
+    var orderCount = document.querySelector("[data-order-count]");
+    var orderWhatsapp = document.querySelector("[data-order-whatsapp]");
     var carousel = document.querySelector("[data-packs-carousel]");
     var customOfferForm = document.querySelector("[data-custom-offer-form]");
+    var selectedOffers = [];
+
+    function offerWhatsappUrl(message) {
+      var number = customOfferForm ? customOfferForm.dataset.whatsappNumber : "";
+      return "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+    }
+
+    function updateWhatsappContact(message) {
+      if (fab && message) fab.href = offerWhatsappUrl(message);
+      if (orderWhatsapp && message) orderWhatsapp.href = offerWhatsappUrl(message);
+    }
+
+    function renderOrder() {
+      orderCount.textContent = selectedOffers.length;
+      orderItems.innerHTML = selectedOffers.map(function (offer, index) {
+        return "<span class=\"order-cart-item\">" + offer.name + " <button type=\"button\" data-remove-order=\"" + index + "\" aria-label=\"Quitar " + offer.name + "\">×</button></span>";
+      }).join("");
+      orderCart.classList.toggle("order-cart-visible", selectedOffers.length > 0);
+      updateWhatsappContact("Hola, quiero hacer una orden con: " + selectedOffers.map(function (offer) {
+        return offer.name + " (" + offer.detail + ")";
+      }).join("; ") + ".");
+    }
+
+    function addToOrder(name, detail) {
+      selectedOffers.push({ name: name, detail: detail });
+      renderOrder();
+    }
 
     function openDrawer() {
       drawer.classList.add("drawer-open");
@@ -79,6 +110,17 @@
         });
       });
 
+      carousel.querySelectorAll("[data-pack-offer]").forEach(function (link) {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          addToOrder(link.dataset.packName, link.dataset.packItems);
+          link.textContent = "Agregado ✓";
+          window.setTimeout(function () {
+            link.innerHTML = "Elegir pack <span aria-hidden=\"true\">+</span>";
+          }, 1600);
+        });
+      });
+
       showSlide(0);
 
       var pointerStart = 0;
@@ -124,6 +166,17 @@
           total += Number(quantity.value) || 0;
         });
         count.textContent = total;
+        if (total > 0) {
+          updateWhatsappContact("Hola, quiero crear una oferta personalizada con " + selectedProducts().join(", ") + ".");
+        }
+      }
+
+      function selectedProducts() {
+        return Array.from(quantities).filter(function (quantity) {
+          return Number(quantity.value) > 0;
+        }).map(function (quantity) {
+          return quantity.value + " " + quantity.name.match(/\[(.*?)\]/)[1];
+        });
       }
 
       quantities.forEach(function (quantity) {
@@ -132,20 +185,24 @@
 
       customOfferForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        var selected = Array.from(quantities).filter(function (quantity) {
-          return Number(quantity.value) > 0;
-        }).map(function (quantity) {
-          return quantity.value + " " + quantity.name.match(/\[(.*?)\]/)[1];
-        });
+        var selected = selectedProducts();
 
         if (selected.length === 0) {
           feedback.textContent = "Selecciona al menos un producto para crear tu oferta.";
           return;
         }
 
-        feedback.textContent = "¡Perfecto! Escríbenos para confirmar tu oferta personalizada.";
-        var whatsappNumber = customOfferForm.dataset.whatsappNumber;
-        window.open("https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent("Hola, quiero crear una oferta con: " + selected.join(", ") + "."), "_blank", "noopener");
+        addToOrder("Oferta personalizada", selected.join(", "));
+        feedback.textContent = "¡Oferta agregada a tu orden! Revisa el carrito para continuar.";
+      });
+    }
+
+    if (orderCart) {
+      orderCart.addEventListener("click", function (event) {
+        var removeButton = event.target.closest("[data-remove-order]");
+        if (!removeButton) return;
+        selectedOffers.splice(Number(removeButton.dataset.removeOrder), 1);
+        renderOrder();
       });
     }
 

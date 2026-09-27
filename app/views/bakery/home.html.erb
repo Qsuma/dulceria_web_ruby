@@ -64,7 +64,10 @@
                     <li><span aria-hidden="true">✦</span><%= item %></li>
                   <% end %>
                 </ul>
-                <div class="pack-footer"><strong>Precio: Dinámico</strong><span aria-hidden="true">↗</span></div>
+                <div class="pack-footer">
+                  <strong>Precio: Dinámico</strong>
+                  <button type="button" class="pack-contact-link" data-pack-offer data-pack-name="<%= pack.name %>" data-pack-items="<%= pack.items.join(" | ") %>">Elegir pack <span aria-hidden="true">+</span></button>
+                </div>
               </div>
             </article>
           <% end %>
@@ -109,7 +112,7 @@
           </label>
         <% end %>
       </div>
-      <button type="submit" class="custom-offer-submit">Solicitar mi oferta <span aria-hidden="true">↗</span></button>
+      <button type="submit" class="custom-offer-submit">Agregar a mi orden <span aria-hidden="true">+</span></button>
       <p class="custom-offer-feedback" data-custom-offer-feedback role="status" aria-live="polite"></p>
     </form>
   </section>
@@ -139,7 +142,20 @@
   </section>
 </main>
 
-<%= link_to "Contactar por WhatsApp", whatsapp_link(@bakery), class: "whatsapp-floating-button", target: "_blank", rel: "noopener", data: { whatsapp_fab: true } %>
+<aside class="order-cart" data-order-cart aria-live="polite">
+  <div class="order-cart-summary">
+    <span class="cart-icon" aria-hidden="true">♧</span>
+    <div>
+      <strong>Tu orden</strong>
+      <span><b data-order-count>0</b> ofertas seleccionadas</span>
+    </div>
+  </div>
+  <div class="order-cart-items" data-order-items></div>
+  <a class="order-cart-button" data-order-whatsapp href="https://wa.me/<%= @bakery.whatsapp_number.gsub(/\D/, "") %>" target="_blank" rel="noopener">
+    <span class="whatsapp-icon" aria-hidden="true">☎</span>
+    Hacer orden
+  </a>
+</aside>
 
 <%= javascript_include_tag "bakery", defer: true %>
 

@@ -38,15 +38,16 @@ RSpec.describe "Bakery page", type: :request do
       expect(response.body).to match(/redes sociales.*pr[oó]ximamente/i)
     end
 
-    it "includes a WhatsApp contact link with the correct number and greeting" do
+    it "includes the order cart WhatsApp link" do
       get root_path
-      expect(response.body).to include("https://wa.me/5353093905?text=")
-      expect(response.body).to include(ERB::Util.url_encode("Hola, quisiera más información sobre sus productos."))
+      expect(response.body).to include("https://wa.me/5353093905")
+      expect(response.body).to include("data-order-whatsapp")
     end
 
-    it "labels the WhatsApp link in Spanish" do
+    it "labels the order action in Spanish" do
       get root_path
-      expect(response.body).to include("Contactar por WhatsApp")
+      expect(response.body).to include("Hacer orden")
+      expect(response.body).to include("whatsapp-icon")
     end
   end
 
