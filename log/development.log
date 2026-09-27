@@ -700,3 +700,12 @@ Processing by BakeryController#home as HTML
 Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 3.3ms)
 
 
+Started GET "/" for 127.0.0.1 at 2026-09-27 11:34:26 -0400
+Processing by BakeryController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering bakery/home.html.erb within layouts/application
+  Rendered bakery/home.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
