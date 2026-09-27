@@ -175,3 +175,48 @@ Processing by BakeryController#home as HTML
 Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2026-09-27 10:33:36 -0400
+Processing by BakeryController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering bakery/home.html.erb within layouts/application
+  Rendered bakery/home.html.erb within layouts/application (Duration: 2.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.8ms | GC: 0.0ms)
+Completed 200 OK in 7ms (Views: 5.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-09-27 10:34:29 -0400
+Processing by BakeryController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering bakery/home.html.erb within layouts/application
+  Rendered bakery/home.html.erb within layouts/application (Duration: 0.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | GC: 0.0ms)
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-09-27 10:34:50 -0400
+Processing by BakeryController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering bakery/home.html.erb within layouts/application
+  Rendered bakery/home.html.erb within layouts/application (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.0ms)
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-09-27 10:37:27 -0400
+Processing by BakeryController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering bakery/home.html.erb within layouts/application
+  Rendered bakery/home.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.5ms | GC: 0.0ms)
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-09-27 10:37:36 -0400
+Processing by BakeryController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering bakery/home.html.erb within layouts/application
+  Rendered bakery/home.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.6ms | GC: 0.0ms)
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+

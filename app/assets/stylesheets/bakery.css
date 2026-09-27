@@ -1,26 +1,41 @@
 :root {
-  --bakery-cream: #fff5fb;
-  --bakery-beige: #fbd6e9;
-  --bakery-brown: #54203f;
-  --bakery-accent: #e91e72;
-  --bakery-lilac: #e9ddff;
-  --bakery-surface: #fffafd;
-  --bakery-muted: #846477;
+  --cream: #fff7ec;
+  --cream-dark: #f9eadc;
+  --pink: #f27883;
+  --pink-soft: #ffd5d8;
+  --coral: #ec5f6d;
+  --chocolate: #55251a;
+  --lilac: #e8ddf7;
+  --mint: #d7eee1;
+  --surface: #fffdf9;
+  --muted: #8b665c;
+  --line: rgba(85, 37, 26, 0.18);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background-color: var(--bakery-cream);
-  color: var(--bakery-brown);
-  font-family: Georgia, "Times New Roman", serif;
+  background: var(--cream);
+  color: var(--chocolate);
+  font-family: "Trebuchet MS", "Gill Sans", sans-serif;
   line-height: 1.5;
 }
 
-/* App bar */
+a { color: inherit; }
+
+.announcement-bar {
+  padding: 0.45rem 1rem;
+  background: var(--chocolate);
+  color: var(--cream);
+  font-size: 0.68rem;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.announcement-bar span { margin: 0 0.75rem; color: var(--pink-soft); }
 
 .app-bar {
   position: sticky;
@@ -28,192 +43,119 @@ body {
   z-index: 20;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background-color: var(--bakery-accent);
-  color: var(--bakery-cream);
+  gap: 0.7rem;
+  padding: 0.8rem max(1.25rem, calc((100vw - 1180px) / 2));
+  background: rgba(255, 247, 236, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
 }
 
-.app-bar-icon {
-  font-size: 1.5rem;
+.app-bar-name { font-family: Georgia, serif; font-size: 1.15rem; font-weight: bold; }
+.app-bar-order { margin-left: auto; color: var(--coral); font-size: 0.78rem; font-weight: bold; text-decoration: none; text-transform: uppercase; }
+
+.drawer-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 2rem; height: 2rem; padding: 0; background: none; border: 0; cursor: pointer; }
+.drawer-toggle span { display: block; width: 1.35rem; height: 2px; background: var(--chocolate); }
+
+.drawer { position: fixed; top: 0; bottom: 0; left: 0; z-index: 30; width: 280px; max-width: 82vw; box-sizing: border-box; padding: 5rem 1.5rem 1.5rem; background: var(--surface); box-shadow: 2px 0 20px rgba(85, 37, 26, 0.16); transform: translateX(-100%); transition: transform 0.3s ease; }
+.drawer.drawer-open { transform: translateX(0); }
+.drawer h2 { margin: 0 0 1.5rem; font-family: Georgia, serif; font-size: 1.8rem; }
+.drawer ul { list-style: none; padding: 0; margin: 0; }
+.drawer li + li { margin-top: 0.5rem; }
+.drawer a { display: block; padding: 0.65rem 0.75rem; text-decoration: none; border-radius: 0.3rem; }
+.drawer a:hover { background: var(--pink-soft); }
+
+.drawer-backdrop { position: fixed; inset: 0; z-index: 25; background: rgba(85, 37, 26, 0.38); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.drawer-backdrop-visible { opacity: 1; pointer-events: auto; }
+
+.bakery-page { max-width: 1180px; margin: 0 auto; padding: 1.25rem clamp(1.25rem, 4vw, 3.5rem) 5rem; }
+
+.bakery-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr); align-items: center; gap: 2rem; min-height: 31rem; padding: clamp(2rem, 6vw, 5rem); overflow: hidden; background: var(--pink-soft); border-radius: 0.45rem; animation: rise-in 0.7s ease both; }
+.bakery-hero::after { position: absolute; right: -3rem; bottom: -5rem; width: 16rem; height: 16rem; border: 1px solid rgba(85, 37, 26, 0.15); border-radius: 50%; box-shadow: 0 0 0 1rem rgba(255, 247, 236, 0.3), 0 0 0 2rem rgba(85, 37, 26, 0.08); content: ""; }
+.hero-copy { position: relative; z-index: 1; max-width: 35rem; }
+.eyebrow, .section-kicker { margin: 0 0 1rem; color: var(--coral); font-size: 0.7rem; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; }
+.eyebrow span { margin: 0 0.35rem; }
+.bakery-hero h1 { max-width: 12ch; margin: 0; font-family: Georgia, serif; font-size: clamp(2.8rem, 7vw, 5.8rem); font-weight: normal; letter-spacing: -0.04em; line-height: 0.98; }
+h1 em, h2 em { color: var(--coral); font-weight: normal; }
+.tagline { max-width: 27rem; margin: 1.5rem 0 2rem; color: var(--muted); }
+.hero-cta, .text-link { display: inline-flex; align-items: center; gap: 0.75rem; color: var(--chocolate); font-size: 0.78rem; font-weight: bold; text-decoration: none; text-transform: uppercase; }
+.hero-cta { padding-bottom: 0.45rem; border-bottom: 2px solid var(--chocolate); }
+.hero-cta span { color: var(--coral); font-size: 1.2rem; }
+
+.hero-mark { position: relative; z-index: 1; display: grid; place-items: center; }
+.hero-logo { display: block; width: min(100%, 23rem); height: auto; border: 0.55rem solid var(--cream); border-radius: 50%; box-shadow: 0 0.8rem 0 rgba(85, 37, 26, 0.12); transform: rotate(2deg); }
+.hero-sparkle { position: absolute; color: var(--coral); font-size: 2rem; animation: twinkle 2.8s ease-in-out infinite; }
+.hero-sparkle-one { top: 2rem; left: 0; }
+.hero-sparkle-two { right: 1rem; bottom: 2rem; color: var(--chocolate); animation-delay: 0.8s; }
+
+.category-pills { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; padding: 1.3rem 0 0.8rem; }
+.category-label { margin-right: 0.4rem; color: var(--muted); font-family: Georgia, serif; font-style: italic; }
+.category-pills a { padding: 0.55rem 0.85rem; background: var(--surface); border: 1px solid var(--line); border-radius: 2rem; font-size: 0.78rem; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease; }
+.category-pills a:hover { background: var(--lilac); transform: translateY(-2px); }
+.category-pills a span { color: var(--coral); }
+
+.product-category, .bakery-info, .bakery-about { scroll-margin-top: 5rem; }
+.product-category { padding-top: 4rem; }
+.section-heading { position: relative; display: flex; align-items: end; gap: 1rem; margin-bottom: 1.5rem; }
+.section-heading .section-kicker { position: absolute; top: -1.1rem; left: 0; }
+.section-heading h2, .bakery-info h2, .bakery-about h2 { margin: 0; font-family: Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: normal; letter-spacing: -0.04em; }
+.section-heading h2 span { color: var(--coral); }
+.section-rule { flex: 1; height: 1px; margin-bottom: 0.45rem; background: var(--line); }
+
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.product-card { overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 0.4rem; transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.product-card:hover { box-shadow: 0 0.8rem 1.5rem rgba(85, 37, 26, 0.12); transform: translateY(-5px) rotate(-0.4deg); }
+.product-card:nth-child(2n) .product-art { background: var(--lilac); }
+.product-card:nth-child(3n) .product-art { background: var(--mint); }
+.product-art, .product-image { display: grid; width: 100%; height: 12rem; box-sizing: border-box; place-items: center; object-fit: cover; background: var(--cream-dark); }
+.product-art { position: relative; color: var(--coral); }
+.product-art strong { color: var(--chocolate); font-family: Georgia, serif; font-size: 5rem; font-weight: normal; line-height: 1; }
+.product-art span { position: absolute; top: 1.2rem; right: 1.2rem; }
+.product-details { position: relative; padding: 1.15rem; }
+.product-details h3 { margin: 0 2rem 0.5rem 0; font-family: Georgia, serif; font-size: 1.2rem; }
+.product-details p { margin: 0; color: var(--muted); font-size: 0.87rem; }
+.product-arrow { position: absolute; top: 1.15rem; right: 1.15rem; color: var(--coral); font-size: 1.2rem; }
+
+.bakery-info { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-top: 5rem; padding: clamp(2rem, 5vw, 4rem); background: var(--chocolate); color: var(--cream); border-radius: 0.4rem; }
+.bakery-info .section-kicker { color: var(--pink-soft); }
+.bakery-info h2 em { color: var(--pink); }
+.visit-details { border-left: 1px solid rgba(255, 247, 236, 0.3); padding-left: 2rem; }
+.visit-details p { margin: 0 0 1.25rem; color: var(--pink-soft); }
+.visit-details strong { display: block; margin-bottom: 0.2rem; color: var(--cream); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.visit-details .text-link { color: var(--cream); }
+
+.bakery-about { display: grid; grid-template-columns: 10rem 1fr auto; gap: 2rem; align-items: center; margin-top: 5rem; padding: 2rem 0; border-top: 1px solid var(--line); }
+.about-stamp { display: grid; width: 8rem; height: 8rem; place-items: center; box-sizing: border-box; padding: 1rem; border: 1px solid var(--coral); border-radius: 50%; color: var(--coral); font-size: 0.62rem; font-weight: bold; letter-spacing: 0.1em; line-height: 1.35; text-align: center; transform: rotate(-8deg); }
+.about-stamp span { font-size: 1.1rem; }
+.bakery-about h2 { margin-bottom: 1rem; font-size: clamp(1.8rem, 4vw, 3rem); }
+.bakery-about > div:nth-child(2) > p:last-child { max-width: 32rem; margin-bottom: 0; color: var(--muted); }
+.bakery-social { color: var(--muted); font-size: 0.75rem; text-align: right; }
+.bakery-social span { color: var(--coral); }
+
+.whatsapp-floating-button { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 15; padding: 0.8rem 1.25rem; background: var(--coral); color: #fff; border-radius: 2rem; box-shadow: 0 0.3rem 1rem rgba(85, 37, 26, 0.24); font-size: 0.8rem; font-weight: bold; text-decoration: none; opacity: 0; pointer-events: none; transform: translateY(1rem); transition: opacity 0.25s ease, transform 0.25s ease; }
+.whatsapp-floating-button-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+@keyframes rise-in { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: translateY(0); } }
+@keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.25) rotate(12deg); } }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+@media (max-width: 700px) {
+  .app-bar-order { display: none; }
+  .bakery-hero { grid-template-columns: 1fr; min-height: auto; padding: 2.5rem 1.5rem 2rem; }
+  .hero-mark { order: -1; }
+  .hero-logo { width: min(72vw, 18rem); border-width: 0.4rem; }
+  .hero-sparkle-one { top: 0; left: 8%; }
+  .hero-sparkle-two { right: 8%; bottom: 0; }
+  .bakery-info { grid-template-columns: 1fr; }
+  .visit-details { border-top: 1px solid rgba(255, 247, 236, 0.3); border-left: 0; padding: 1.5rem 0 0; }
+  .bakery-about { grid-template-columns: 6rem 1fr; gap: 1.25rem; }
+  .about-stamp { width: 6rem; height: 6rem; }
+  .bakery-social { grid-column: 2; text-align: left; }
 }
 
-.app-bar-name {
-  font-size: 1.25rem;
-  font-weight: bold;
+@media (max-width: 420px) {
+  .announcement-bar { font-size: 0.58rem; }
+  .category-label { width: 100%; }
+  .bakery-about { grid-template-columns: 1fr; }
+  .bakery-social { grid-column: auto; }
 }
-
-.drawer-toggle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.drawer-toggle span {
-  display: block;
-  height: 2px;
-  background-color: var(--bakery-cream);
-  border-radius: 1px;
-}
-
-/* Drawer */
-
-.drawer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 260px;
-  max-width: 80vw;
-  background-color: var(--bakery-surface);
-  box-shadow: 2px 0 12px rgba(84, 32, 63, 0.18);
-  transform: translateX(-100%);
-  transition: transform 0.25s ease;
-  z-index: 30;
-  padding: 1.5rem 1rem;
-  box-sizing: border-box;
-}
-
-.drawer.drawer-open {
-  transform: translateX(0);
-}
-
-.drawer h2 {
-  margin-top: 0;
-}
-
-.drawer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.drawer li + li {
-  margin-top: 0.5rem;
-}
-
-.drawer a {
-  display: block;
-  padding: 0.5rem;
-  color: var(--bakery-brown);
-  text-decoration: none;
-  border-radius: 0.375rem;
-}
-
-.drawer a:hover {
-  background-color: var(--bakery-lilac);
-}
-
-.drawer-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(84, 32, 63, 0.4);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-  z-index: 25;
-}
-
-.drawer-backdrop-visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.bakery-page {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
-.bakery-hero {
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: var(--bakery-beige);
-  border: 1px solid #f2afd0;
-  border-radius: 0.5rem;
-}
-
-.bakery-hero h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2rem;
-}
-
-.tagline {
-  margin: 0;
-  font-style: italic;
-}
-
-.product-category {
-  margin-top: 2rem;
-  scroll-margin-top: 4.5rem; /* offset for the sticky app bar when anchor-scrolling */
-}
-
-.bakery-info,
-.bakery-about {
-  margin-top: 2rem;
-  scroll-margin-top: 4.5rem;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-}
-
-.product-card {
-  background-color: var(--bakery-surface);
-  border: 1px solid var(--bakery-beige);
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-
-.product-image {
-  width: 100%;
-  height: auto;
-  border-radius: 0.375rem;
-  margin-bottom: 0.75rem;
-}
-
-.bakery-social {
-  text-align: center;
-  color: var(--bakery-muted);
-  margin-top: 1rem;
-}
-
-.whatsapp-floating-button {
-  position: fixed;
-  bottom: 1.25rem;
-  right: 1.25rem;
-  padding: 0.75rem 1.25rem;
-  background-color: var(--bakery-accent);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 2rem;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(84, 32, 63, 0.24);
-  opacity: 0;
-  transform: translateY(1rem);
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  z-index: 15;
-}
-
-.whatsapp-floating-button-visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-@media (max-width: 480px) {
-  .bakery-hero h1 {
-    font-size: 1.5rem;
-  }
-}
-
