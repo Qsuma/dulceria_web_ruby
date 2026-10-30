@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: dulceria-web-ruby
+    runtime: ruby
+    plan: free
+    buildCommand: bundle install && bundle exec rails assets:precompile
+    startCommand: bundle exec puma -C config/puma.rb
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: WHATSAPP_CONTACT_NUMBER
+        sync: false
